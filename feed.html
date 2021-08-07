@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PetPat</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/JasonFengGit/Unihack-PetPat/master/pawprint.svg">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  </head>
+  <body>
+    <style>
+        .profile_head {
+        }
+    
+        .cover {
+            background-image: url(https://images.unsplash.com/photo-1530305408560-82d13781b33a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80);
+            background-size: cover;
+            background-repeat: no-repeat;
+            
+        }
+        .profile {
+            transform: translateY(-500px);
+            margin-top: 50px;
+            margin-left: 50px;
+            width: 75%;
+        }
+        html, body {
+            margin: 0; 
+            height: 100%;
+            overflow: hidden;
+            background: darkgray;
+            font-family: sans-serif;
+            zoom: 1.05;
+        }
+        .profile_page::-webkit-scrollbar {
+            width: 0em;
+        }
+        
+        .profile_page::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 0px rgba(0, 0, 0, 0.3);
+        }
+        
+        .profile_page::-webkit-scrollbar-thumb {
+            background-color: darkgrey;
+            outline: 0px solid slategrey;
+        }
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feed {
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            opacity: 0;
+            transition: opacity 0.1s ease-in-out;
+        }
+
+        .loaded.feed {
+            opacity: 1;
+        }
+
+        .feed--status {
+            position: absolute;
+            top: 50%;
+            margin-top: -30px;
+            z-index: 2;
+            width: 100%;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .feed--status i {
+            font-size: 100px;
+            opacity: 0;
+            transform: scale(0.3);
+            transition: all 0.2s ease-in-out;
+            position: absolute;
+            width: 100px;
+        }
+
+        .fa-heart {
+            transform: scale(1);
+            color: #292929;
+        }
+
+        .fa-forward {
+            transform: scale(1);
+            color: #292929;
+        }
+
+        .fa-image {
+            transform: scale(1);
+            color: #292929;
+        }
+
+        .fa-user-friends {
+            transform: scale(1);
+            color: #292929;
+        }
+
+        .fa-user-friends:hover {
+            transform: scale(1.25);
+        }
+
+        .fa-forward:hover {
+            transform: scale(1.25);
+        }
+
+        .fa-heart:hover {
+            transform: scale(1.25);
+        }
+
+        .fa-image:hover {
+            transform: scale(1.25);
+        }
+
+        .fa-user {
+            transform: scale(1);
+            color: #292929;
+        }
+
+        .fa-user:hover {
+            transform: scale(1.25);
+        }
+
+        .feed--cards {
+            align-self: center;
+            text-align: center;
+            justify-content: center;
+            z-index: 1;
+            margin-left: -300px;
+        }
+
+        .feed--card {
+            margin-top: 70px;
+            display: inline-block;
+            height: 90vw;
+            width: 300px;
+            height: 500px;
+            background: #7a7a7a;
+            padding-bottom: -5px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: absolute;
+            will-change: transform;
+            transition: all 0.3s ease-in-out;
+
+            vertical-align: middle;
+        }
+
+        .feed--card img {
+            height: 100%;
+            pointer-events: none;
+            text-align: center;
+            align-self: center;
+
+            vertical-align: middle;
+        }
+
+        .feed--buttons {
+            text-align: center;
+            margin-top: 580px;
+        }
+
+        .feed--buttons button {
+            border-radius: 50%;
+            line-height: 60px;
+            width: 60px;
+            border: 0;
+            background: #ffffff00;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .feed--buttons i {
+            font-size: 32px;
+            vertical-align: middle;
+        }
+
+    </style>
+    <div style=" height:100%; width: 100%; display: table;">
+        <div style="display: table-row;">
+            <div class="profile_page" style="width: 35%;display: table-cell;  background: #292929;">
+                <div class="col-md-5 profile">
+                    <div class="bg-white shadow rounded overflow-hidden">
+                        <div class="px-4 pt-0 pb-4 cover">
+                            <div class="media profile_head">
+                                <div class="mr-3">
+                                    <img src="{{get_icon()}}" alt="..." width="130" height="130" class="rounded mb-2 img-thumbnail" style="margin-top: 50px;">
+                                </div>
+                                <div class="media-body mb-5 text-white">
+                                    <h4 class="mt-0 mb-0">{{username}}</h4>
+                                    <p class="small mb-4">Los Angeles</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 d-flex justify-content-end text-center" style="background: rgb(243, 243, 243)">
+                            <ul class="list-inline mb-0">
+                                <li class="list-inline-item">
+                                    <h5 class="font-weight-bold mb-0 d-block">105</h5><small class="text-muted"> <i class="fas fa-heart mr-1"></i> Loves</small>
+                                </li>
+                                <li class="list-inline-item">
+                                    <h5 class="font-weight-bold mb-0 d-block">87</h5><small class="text-muted"> <i class="fas fa-image mr-1"></i> Photos</small>
+                                </li>
+                                <li class="list-inline-item">
+                                    <h5 class="font-weight-bold mb-0 d-block">201</h5><small class="text-muted"> <i class="fas fa-user mr-1"></i> Connections</small>
+                                </li>
+                                <li class="list-inline-item">
+                                    <h5 class="font-weight-bold mb-0 d-block">23</h5><small class="text-muted"> <i class="fas fa-user-friends mr-1"></i> Groups</small>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="px-4 py-3" style="margin-top: 0px;">
+                            <h5 class="mb-0">About</h5>
+                            <div class="p-4 rounded shadow-sm" style="background: rgb(214, 214, 214)">
+                                <p class="font-italic mb-0">Love animals</p>
+                                <p class="font-italic mb-0">Lives in LA</p>
+                                <p class="font-italic mb-0">Photographer</p>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="display: table-cell; background: #292929;"> 
+                <div class="feed">
+                    <div class="feed--cards" id="abcd">
+                        {% for img_url in get_feeds(6) %}
+                        <div class="feed--card">
+                            <img src={{img_url}}>
+                        </div>
+                        {% endfor %}
+                    </div>
+                
+                    <div class="feed--buttons">
+                        <button id="skip"><i style="color: rgb(226, 226, 226);" class="fas fa-forward"></i></button>
+                        <button id="love"><i style="color: rgb(226, 226, 226);" class="fas fa-heart"></i></button>
+                        <button id="userrr"><i style="color: rgb(226, 226, 226);" class="fas fa-user mr-1"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script language="JavaScript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+    <script>
+        'use strict';
+
+        var feedContainer = document.querySelector('.feed');
+        var allCards = document.querySelectorAll('.feed--card');
+        var skip = document.getElementById('skip');
+        var love = document.getElementById('love');
+        var count = 0;
+
+        function initCards(card, index) {
+            var newCards = document.querySelectorAll('.feed--card:not(.removed)');
+
+            newCards.forEach(function (card, index) {
+                card.style.zIndex = allCards.length - index;
+                card.style.transform = 'scale(' + (20 - index) / 20 + ') translateY(-' + 30 * index + 'px)';
+                card.style.opacity = (10 - index) / 10;
+            });
+
+            feedContainer.classList.add('loaded');
+        }
+
+        initCards();
+
+        function htmlToElement(html) {
+            var template = document.createElement('template');
+            html = html.trim(); 
+            template.innerHTML = html;
+            return template.content.firstChild;
+        }
+
+        function get_feed_from_python() {
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                    let card_l = document.getElementById("abcd");
+                    card_l.appendChild(htmlToElement('<div class="feed--card"><img src="'+this.responseText+'"></div>'));
+                }
+            };
+
+            request.open('GET', '/get_feeds');
+            request.send();
+        }
+
+        function set_interaction(love, card) {
+            console.log(love);
+            if(love){
+                var l = card.getElementsByTagName('img')[0].src.split("/");
+                var name = l[l.length-1].split(".")[0];
+                console.log(name);
+                var request = new XMLHttpRequest();
+                request.open('GET', '/set_inter/'+name);
+                request.send();
+            }
+            
+        }
+
+        function getListener(love) {
+            return function (event) {
+                var cards = document.querySelectorAll('.feed--card:not(.removed)');
+                var removed_cards = document.querySelectorAll('.feed--card.removed');
+
+                var moveOutWidth = document.body.clientWidth * 1.5;
+
+                if (!cards.length) return false;
+
+                var card = cards[0];
+
+                card.classList.add('removed');
+
+                if (love) {
+                    card.style.transform = 'translate(' + moveOutWidth + 'px, -100px) rotate(-30deg)';
+                } else {
+                    card.style.transform = 'translate(-' + moveOutWidth + 'px, -100px) rotate(30deg)';
+                }
+                set_interaction(love, card);
+                get_feed_from_python();
+                if (removed_cards.length && removed_cards.length > 0) {
+                    let card_l = document.getElementById("abcd");
+                    card_l.removeChild(removed_cards[0]);
+                }
+                count += 1;
+
+                initCards();
+
+                event.preventDefault();
+            };
+        }
+
+        var skipListener = getListener(false);
+        var loveListener = getListener(true);
+
+        skip.addEventListener('click', skipListener);
+        love.addEventListener('click', loveListener);
+    </script>
+    <script src="https://kit.fontawesome.com/cd9281ec55.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+  </body>
+</html>
