@@ -1,7 +1,8 @@
 # PetPat(赛道：Reconnect，Solo)
 
 link：https://bit.ly/petpat_demo
-
+## Feed Page(主页面)
+![](https://github.com/JasonFengGit/Unihack-PetPat/blob/master/feedpage.png?raw=true)
 ## Inspiration
 
 距离Covid疫情开始已经快两年时间，我们所处的世界发生了天翻地覆的变化，居家隔离的政策让人们不得不将自己的社交半径缩小到以米为单位。
@@ -16,7 +17,7 @@ link：https://bit.ly/petpat_demo
 
 ## How we built it
 
-本次使用的技术栈: 
+本次使用的技术栈: <br/>
 ![技术栈](https://raw.githubusercontent.com/JasonFengGit/Unihack-PetPat/master/tech.png)
 
 ## Challenges we ran into
