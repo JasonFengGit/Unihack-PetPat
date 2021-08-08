@@ -41,3 +41,10 @@ link：https://bit.ly/petpat_demo
 - 开发上传照片，换头像，编辑profile，收藏夹，Connect其他用户，用户群聊等功能
 - 引导用户上传照片，分发真实用户上传的图片
 - 使用用户反馈数据训练排序模型
+
+## Reference
+
+- 产品样式借鉴了Tinder
+- 图片来源是谷歌图片以及unplash.com
+- Bootstrap
+- https://pypi.org/project/image-embeddings/
