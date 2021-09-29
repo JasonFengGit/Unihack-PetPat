@@ -1,5 +1,6 @@
 # PetPat(赛道：Reconnect，Solo)
-> this project is developed during a 48 hours hackathon. Sorry I do not have an english description right now. Feel free to click the link below to try it!<br/>
+> This project is developed during a 48 hours hackathon. <br/>
+> Sorry I do not have an english description right now. Feel free to click the link below to try it!<br/>
 
 link：https://bit.ly/petpat_demo
 ## Feed Page(主页面)
